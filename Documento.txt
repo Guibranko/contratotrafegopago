@@ -1,0 +1,646 @@
+html
+
+
+
+    
+    
+    Contrato Digital - Assinatura Online
+    
+    
+    
+    
+        /* Variáveis CSS para cores */
+        :root {
+            --primary-color: #007bff;<br/>
+            --secondary-color: #6c757d;<br/>
+            --background-color: #f8f9fa;<br/>
+            --text-color: #343a40;<br/>
+            --border-color: #dee2e6;<br/>
+            --success-color: #28a745;<br/>
+            --error-color: #dc3545;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;<br/>
+            margin: 0;<br/>
+            padding: 0;<br/>
+            background-color: var(--background-color);<br/>
+            color: var(--text-color);<br/>
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;<br/>
+            margin: 20px auto;<br/>
+            padding: 20px;<br/>
+            background-color: #fff;<br/>
+            border-radius: 8px;<br/>
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        header {
+            background-color: var(--primary-color);<br/>
+            color: #fff;<br/>
+            padding: 15px 0;<br/>
+            text-align: center;<br/>
+            border-radius: 8px 8px 0 0;<br/>
+            margin-bottom: 20px;
+        }
+
+        header h1 {
+            margin: 0;<br/>
+            font-size: 2em;<br/>
+            letter-spacing: 1px;
+        }
+
+        footer {
+            text-align: center;<br/>
+            padding: 20px;<br/>
+            margin-top: 30px;<br/>
+            color: var(--secondary-color);<br/>
+            font-size: 0.9em;<br/>
+            border-top: 1px solid var(--border-color);
+        }
+
+        h2, h3 {
+            color: var(--primary-color);<br/>
+            border-bottom: 2px solid var(--primary-color);<br/>
+            padding-bottom: 5px;<br/>
+            margin-top: 30px;
+        }
+
+        .page {
+            display: none; /* Esconde todas as páginas por padrão */
+        }
+
+        .page.active {
+            display: block; /* Mostra a página ativa */
+        }
+
+        /* Home Page */
+        .home-content {
+            text-align: center;<br/>
+            padding: 40px 20px;
+        }
+
+        .home-content h2 {
+            font-size: 2.5em;<br/>
+            margin-bottom: 20px;<br/>
+            color: var(--text-color);<br/>
+            border-bottom: none;
+        }
+
+        .home-content p {
+            font-size: 1.1em;<br/>
+            margin-bottom: 30px;<br/>
+            color: var(--secondary-color);
+        }
+
+        /* Formulário */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;<br/>
+            margin-bottom: 5px;<br/>
+            font-weight: bold;<br/>
+            color: var(--text-color);
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="tel"],
+        .form-group textarea,
+        .form-group select {
+            width: calc(100% - 22px);<br/>
+            padding: 10px;<br/>
+            border: 1px solid var(--border-color);<br/>
+            border-radius: 5px;<br/>
+            font-size: 1em;<br/>
+            box-sizing: border-box;
+        }
+
+        .form-group input[type="radio"] {
+            margin-right: 5px;
+        }
+
+        .form-group input:focus,<br/>
+        .form-group textarea:focus,<br/>
+        .form-group select:focus {<br/>
+            border-color: var(--primary-color);<br/>
+            outline: none;<br/>
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+
+        .error-message {
+            color: var(--error-color);<br/>
+            font-size: 0.85em;<br/>
+            margin-top: 5px;<br/>
+            display: none; /* Escondido por padrão */
+        }
+
+        .checkbox-group {
+            margin-top: 20px;<br/>
+            display: flex;<br/>
+            align-items: center;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            margin-right: 10px;<br/>
+            transform: scale(1.2);
+        }
+
+        /* Botões */
+        .btn {
+            display: inline-block;<br/>
+            padding: 12px 25px;<br/>
+            font-size: 1.1em;<br/>
+            font-weight: bold;<br/>
+            text-align: center;<br/>
+            text-decoration: none;<br/>
+            border-radius: 5px;<br/>
+            cursor: pointer;<br/>
+            transition: background-color 0.3s ease, transform 0.2s ease;<br/>
+            margin: 10px 5px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);<br/>
+            color: #fff;<br/>
+            border: 1px solid var(--primary-color);
+        }
+
+        .btn-primary:hover {<br/>
+            background-color: #0056b3;<br/>
+            border-color: #0056b3;<br/>
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary-color);<br/>
+            color: #fff;<br/>
+            border: 1px solid var(--secondary-color);
+        }
+
+        .btn-secondary:hover {<br/>
+            background-color: #5a6268;<br/>
+            border-color: #5a6268;<br/>
+            transform: translateY(-2px);
+        }
+
+        .btn-outline-primary {
+            background-color: transparent;<br/>
+            color: var(--primary-color);<br/>
+            border: 1px solid var(--primary-color);
+        }
+
+        .btn-outline-primary:hover {<br/>
+            background-color: var(--primary-color);<br/>
+            color: #fff;<br/>
+            transform: translateY(-2px);
+        }
+
+        /* Canvas de Assinatura */
+        #signatureCanvas {
+            border: 1px solid var(--border-color);<br/>
+            border-radius: 5px;<br/>
+            background-color: #fefefe;<br/>
+            cursor: crosshair;<br/>
+            touch-action: none; /* Previne scroll em dispositivos touch */
+        }
+
+        .signature-area {
+            margin-top: 20px;<br/>
+            text-align: center;
+        }
+
+        /* Visualização do Contrato */
+        .contract-content {
+            border: 1px solid var(--border-color);<br/>
+            padding: 20px;<br/>
+            border-radius: 5px;<br/>
+            background-color: #fefefe;<br/>
+            max-height: 600px;<br/>
+            overflow-y: auto;<br/>
+            margin-bottom: 20px;
+        }
+
+        .contract-content h3 {
+            color: var(--text-color);<br/>
+            border-bottom: 1px solid var(--border-color);<br/>
+            padding-bottom: 5px;<br/>
+            margin-top: 20px;<br/>
+            font-size: 1.2em;
+        }
+
+        .contract-content p {
+            margin-bottom: 10px;<br/>
+            text-align: justify;
+        }
+
+        .contract-signature-placeholder {
+            margin-top: 40px;<br/>
+            text-align: center;<br/>
+            border-top: 1px dashed var(--border-color);<br/>
+            padding-top: 20px;
+        }
+
+        .contract-signature-placeholder img {
+            max-width: 200px;<br/>
+            height: auto;<br/>
+            border-bottom: 1px solid #000;<br/>
+            padding-bottom: 5px;<br/>
+            margin-bottom: 5px;
+        }
+
+        .contract-signature-placeholder p {
+            font-size: 0.9em;<br/>
+            color: var(--secondary-color);
+        }
+
+        /* Mensagens de Status */
+        #statusMessage {
+            margin-top: 20px;<br/>
+            padding: 10px;<br/>
+            border-radius: 5px;<br/>
+            font-weight: bold;<br/>
+            text-align: center;<br/>
+            display: none; /* Escondido por padrão */
+        }
+
+        .status-success {
+            background-color: #d4edda;<br/>
+            color: var(--success-color);<br/>
+            border: 1px solid #c3e6cb;
+        }
+
+        .status-error {
+            background-color: #f8d7da;<br/>
+            color: var(--error-color);<br/>
+            border: 1px solid #f5c6cb;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;<br/>
+                padding: 15px;
+            }
+
+            header h1 {
+                font-size: 1.5em;
+            }
+
+            .home-content h2 {
+                font-size: 1.8em;
+            }
+
+            .btn {
+                width: 100%;<br/>
+                margin: 10px 0;
+            }
+
+            .form-group input[type="text"],
+            .form-group input[type="email"],
+            .form-group input[type="tel"],
+            .form-group textarea,
+            .form-group select {
+                width: 100%;
+            }
+        }
+    
+
+
+    
+
+    
+        
+            Contrato Digital
+        
+
+        
+        
+            
+                Assine seu Contrato de Gestão de Tráfego Pago
+                Este contrato estabelece os termos e condições para a prestação de serviços de gestão de tráfego pago em plataformas como Meta Ads (Facebook/Instagram Ads).
+                Principais Termos:
+                
+                    Valor Mensal: R$ 350,00
+                    Duração Mínima: 3 meses
+                    Plataforma Principal: Meta Ads (Facebook/Instagram Ads)
+                    Início: Imediato após assinatura
+                
+                Revisar e Assinar Contrato
+            
+        
+
+        
+        
+            Dados do Contratante
+            
+                
+                    Nome Completo / Razão Social:
+                    
+                    
+                
+
+                
+                    E-mail:
+                    
+                    
+                
+
+                
+                    Telefone (com DDD):
+                    
+                    
+                
+
+                
+                    Tipo de Pessoa:
+                    
+                        
+                        Física
+                        
+                        Jurídica
+                    
+                
+
+                
+                    CPF:
+                    
+                    
+                
+
+                
+                    Endereço Completo:
+                    
+                    
+                
+
+                
+                    Assinatura Digital
+                    Desenhe sua assinatura no espaço abaixo:
+                    
+                    
+                    Limpar Assinatura
+                    
+                
+
+                
+                    
+                    Declaro que li e concordo com os termos do contrato.
+                    
+                
+
+                
+                    Voltar
+                    Revisar Contrato
+                
+            
+        
+
+        
+        
+            Contrato de Prestação de Serviços
+            
+                
+            
+            
+            
+                Voltar e Editar
+                Baixar PDF + Salvar Contrato
+            
+        
+
+        
+            © 2026 Contrato Digital. Todos os direitos reservados.
+            Contato: contato@suaempresa.com | (XX) XXXX-XXXX
+        
+    
+
+    
+        // 
+        // # #
+        // #                                       CONFIGURAÇÃO DO GOOGLE APPS SCRIPT WEBHOOK                                   #
+        // # #
+        // 
+
+        // PASSO 3: COLE A URL DO SEU GOOGLE APPS SCRIPT AQUI
+        // Substitua "https://script.google.com/macros/s/AKfycbyH-4d7_RqUQIuBkfhNfgdqKDyIeIkt6sJWdbSaB84TRvV6VDkaGW7fHcWbvbUhwJc/exec" pela URL que você obteve no PASSO 2.7 das instruções acima.
+        const GOOGLE_SHEETS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyH-4d7_RqUQIuBkfhNfgdqKDyIeIkt6sJWdbSaB84TRvV6VDkaGW7fHcWbvbUhwJc/exec";
+
+        // 
+        // # #
+        // #                                       FIM DA CONFIGURAÇÃO DO GOOGLE APPS SCRIPT                                    #
+        // # #
+        // 
+
+        // Variáveis globais para o canvas de assinatura
+        const canvas = document.getElementById('signatureCanvas');
+        const ctx = canvas.getContext('2d');
+        let drawing = false;
+        let lastX = 0;
+        let lastY = 0;
+
+        // Função para alternar entre as páginas
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+            // Limpa mensagens de status ao mudar de página
+            const statusMessage = document.getElementById('statusMessage');
+            statusMessage.style.display = 'none';
+            statusMessage.textContent = '';
+            statusMessage.classList.remove('status-success', 'status-error');
+        }
+
+        // Inicializa o canvas
+        function initCanvas() {
+            ctx.lineWidth = 2;
+            ctx.lineCap = 'round';
+            ctx.strokeStyle = '#000';
+
+            // Eventos para mouse
+            canvas.addEventListener('mousedown', (e) => {
+                drawing = true;
+                [lastX, lastY] = [e.offsetX, e.offsetY];
+            });
+            canvas.addEventListener('mousemove', draw);
+            canvas.addEventListener('mouseup', () => drawing = false);
+            canvas.addEventListener('mouseout', () => drawing = false);
+
+            // Eventos para touch
+            canvas.addEventListener('touchstart', (e) => {
+                e.preventDefault(); // Previne o scroll da página
+                drawing = true;
+                const touch = e.touches[0];
+                const rect = canvas.getBoundingClientRect();
+                [lastX, lastY] = [touch.clientX - rect.left, touch.clientY - rect.top];
+            });
+            canvas.addEventListener('touchmove', (e) => {
+                e.preventDefault(); // Previne o scroll da página
+                draw(e.touches[0]);
+            });
+            canvas.addEventListener('touchend', () => drawing = false);
+        }
+
+        function draw(e) {
+            if (!drawing) return;
+            const clientX = e.clientX || e.offsetX;
+            const clientY = e.clientY || e.offsetY;
+            const rect = canvas.getBoundingClientRect();
+            const currentX = clientX - rect.left;
+            const currentY = clientY - rect.top;
+
+            ctx.beginPath();
+            ctx.moveTo(lastX, lastY);
+            ctx.lineTo(currentX, currentY);
+            ctx.stroke();
+            [lastX, lastY] = [currentX, currentY];
+        }
+
+        function clearSignature() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            document.getElementById('errorSignature').style.display = 'none';
+        }
+
+        // Validação de CPF/CNPJ
+        function isValidCpfCnpj(value, type) {
+            if (type === 'Física') {
+                value = value.replace(/[^\d]+/g, '');
+                if (value.length !== 11 || /^(\d)\1{10}$/.test(value)) return false;
+                let sum = 0, rest;
+                for (let i = 1; i <= 9; i++) sum += parseInt(value.substring(i - 1, i)) * (11 - i);
+                rest = (sum * 10) % 11;
+                if ((rest === 10) || (rest === 11)) rest = 0;
+                if (rest !== parseInt(value.substring(9, 10))) return false;
+                sum = 0;
+                for (let i = 1; i <= 10; i++) sum += parseInt(value.substring(i - 1, i)) * (12 - i);
+                rest = (sum * 10) % 11;
+                if ((rest === 10) || (rest === 11)) rest = 0;
+                if (rest !== parseInt(value.substring(10, 11))) return false;
+                return true;
+            } else { // Jurídica (CNPJ)
+                value = value.replace(/[^\d]+/g, '');
+                if (value.length !== 14 || /^(\d)\1{13}$/.test(value)) return false;
+                let size = value.length - 2;
+                let numbers = value.substring(0, size);
+                let digits = value.substring(size);
+                let sum = 0;
+                let pos = size - 7;
+                for (let i = size; i >= 1; i--) {
+                    sum += parseInt(numbers.charAt(i - 1)) * pos--;
+                    if (pos < 2) pos = 9;
+                }
+                rest = sum % 11 < 2 ? 0 : 11 - sum % 11;
+                if (rest !== parseInt(digits.charAt(0))) return false;
+                size = size + 1;
+                numbers = value.substring(0, size);
+                sum = 0;
+                pos = size - 7;
+                for (let i = size; i >= 1; i--) {
+                    sum += parseInt(numbers.charAt(i - 1)) * pos--;
+                    if (pos < 2) pos = 9;
+                }
+                rest = sum % 11 < 2 ? 0 : 11 - sum % 11;
+                if (rest !== parseInt(digits.charAt(1))) return false;
+                return true;
+            }
+        }
+
+        // Formatação de CPF/CNPJ e Telefone
+        function formatCpfCnpj(input) {
+            let value = input.value.replace(/\D/g, '');
+            const type = document.querySelector('input[name="tipoPessoa"]:checked').value;
+            if (type === 'Física') { // CPF
+                if (value.length > 11) value = value.substring(0, 11);
+                if (value.length > 9) value = value.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})$/, '$1.$2.$3-$4');
+                else if (value.length > 6) value = value.replace(/^(\d{3})(\d{3})(\d{3})$/, '$1.$2.$3');
+                else if (value.length > 3) value = value.replace(/^(\d{3})(\d{3})$/, '$1.$2');
+                else if (value.length > 0) value = value.replace(/^(\d{3})$/, '$1');
+            } else { // CNPJ
+                if (value.length > 14) value = value.substring(0, 14);
+                if (value.length > 12) value = value.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/, '$1.$2.$3/$4-$5');
+                else if (value.length > 8) value = value.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})$/, '$1.$2.$3/$4');
+                else if (value.length > 5) value = value.replace(/^(\d{2})(\d{3})(\d{3})$/, '$1.$2.$3');
+                else if (value.length > 2) value = value.replace(/^(\d{2})(\d{3})$/, '$1.$2');
+                else if (value.length > 0) value = value.replace(/^(\d{2})$/, '$1');
+            }
+            input.value = value;
+        }
+
+        function formatTelefone(input) {
+            let value = input.value.replace(/\D/g, '');
+            if (value.length > 11) value = value.substring(0, 11);
+            if (value.length > 10) value = value.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
+            else if (value.length > 6) value = value.replace(/^(\d{2})(\d{4})(\d{0,4})$/, '($1) $2-$3');
+            else if (value.length > 2) value = value.replace(/^(\d{2})(\d{0,5})$/, '($1) $2');
+            else if (value.length > 0) value = value.replace(/^(\d{0,2})$/, '($1');
+            input.value = value;
+        }
+
+        // Event Listeners para formatação e validação em tempo real
+        document.getElementById('cpfCnpj').addEventListener('input', function() {
+            formatCpfCnpj(this);
+            validateField(this, 'errorCpfCnpj', 'CPF/CNPJ inválido.');
+        });
+        document.getElementById('telefone').addEventListener('input', function() {
+            formatTelefone(this);
+            validateField(this, 'errorTelefone', 'Telefone inválido.');
+        });
+        document.querySelectorAll('input[name="tipoPessoa"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const cpfCnpjLabel = document.getElementById('cpfCnpjLabel');
+                const cpfCnpjInput = document.getElementById('cpfCnpj');
+                cpfCnpjInput.value = ''; // Limpa o campo ao mudar o tipo
+                if (this.value === 'Física') {
+                    cpfCnpjLabel.textContent = 'CPF:';
+                    cpfCnpjInput.placeholder = 'XXX.XXX.XXX-XX';
+                } else {
+                    cpfCnpjLabel.textContent = 'CNPJ:';
+                    cpfCnpjInput.placeholder = 'XX.XXX.XXX/XXXX-XX';
+                }
+                validateField(cpfCnpjInput, 'errorCpfCnpj', 'CPF/CNPJ inválido.'); // Revalida
+            });
+        });
+
+        // Função genérica de validação de campo
+        function validateField(inputElement, errorElementId, errorMessage) {
+            const errorElement = document.getElementById(errorElementId);
+            if (inputElement.checkValidity()) {
+                errorElement.style.display = 'none';
+                return true;
+            } else {
+                errorElement.textContent = errorMessage;
+                errorElement.style.display = 'block';
+                return false;
+            }
+        }
+
+        // Validação do formulário antes de gerar o contrato
+        document.getElementById('contractForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            let isValid = true;
+
+            // Validação de campos obrigatórios
+            isValid &= validateField(document.getElementById('nomeCompleto'), 'errorNomeCompleto', 'Nome completo é obrigatório.');
+            isValid &= validateField(document.getElementById('email'), 'errorEmail', 'E-mail inválido.');
+            isValid &= validateField(document.getElementById('telefone'), 'errorTelefone', 'Telefone é obrigatório.');
+            isValid &= validateField(document.getElementById('endereco'), 'errorEndereco', 'Endereço é obrigatório.');
+
+            // Validação de CPF/CNPJ com algoritmo
+            const cpfCnpjInput = document.getElementById('cpfCnpj');
+            const tipoPessoa = document.querySelector('input[name="tipoPessoa"]:checked').value;
+            if (!isValidCpfCnpj(cpfCnpjInput.value, tipoPessoa)) {
+                document.getElementById('errorCpfCnpj').textContent = tipoPessoa === 'Física' ? 'CPF inválido.' : 'CNPJ inválido.';
+                document.getElementById('errorCpfCnpj').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('errorCpfCnpj').style.display = 'none';
+            }
+
+            // Validação da assinatura
+            if (canvas.toDataURL() === canvas.toDataURL('image/png').replace(/data:image\/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUgAAACXCAYAAAD981Y6AAABlklEQVR4Xu3UMQ0AAAgDMO5/dG2gBwQoF/gB
